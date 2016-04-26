@@ -41,47 +41,83 @@ class Filmes {
     
     private $lancamento;
     
-    function getId() 
+    /**
+     * 
+     * @return int
+     */
+    
+    public function getId() 
     {
         return $this->id;
     }
+    
+    /**
+     * 
+     * @return string
+     */
 
-    function getNome() 
+    public function getNome() 
     {
         return $this->nome;
     }
+    
+    /**
+     * 
+     * @return string
+     */
 
-    function getGenero() 
+    public function getGenero() 
     {
         return $this->genero;
     }
+    
+    /**
+     * 
+     * @return boolean
+     */
 
-    function getLancamento() 
+    public function getLancamento() 
     {
         return $this->lancamento;
     }
+    
+    /**
+     * 
+     * @param string $nome
+     */
 
-    function setId($id) 
-    {
-        $this->id = $id;
-    }
-
-    function setNome($nome) 
+    public function setNome($nome) 
     {
         $this->nome = $nome;
     }
 
-    function setGenero($genero) 
+    /**
+     * 
+     * @param string $genero
+     */
+    
+    public function setGenero($genero) 
     {
         $this->genero = $genero;
     }
 
-    function setLancamento($lancamento) 
+    /**
+     * 
+     * @param boolean $lancamento
+     */
+    
+    public function setLancamento($lancamento) 
     {
-        $this->lancamento = $lancamento;
+        if (is_bool ($lancamento))
+        {
+            $this->lancamento = $lancamento;
+        } else{
+            throw new BadMethodCallException("O valor deve ser do tipo booleano");
+        }
     }
 
 }
 
 //alt + insert = getters and setters
 //ORM conexão com o banco
+//get e set sempre publico
