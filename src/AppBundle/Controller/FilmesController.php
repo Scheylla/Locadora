@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Filmes;
+use AppBundle\Entity\Genero;
 
 class FilmesController extends Controller {
 
@@ -61,13 +62,16 @@ class FilmesController extends Controller {
     }
     
     /**
-     * @Route("/filmes/genero")
+     * @Route("/filmes/genero", name="genero_index")
      */
     
     public function generoAction()
     {
         $repositorio = $this->getEm()->getRepository('AppBundle:Genero');
-        $dados = $repositorio-> findAll();
+        
+        $dados = $repositorio-> findBy(array(), array('nome' => "ASC"));
+        
+        //DESC é ordem decrescente
         
         return $this->render('filmes/genero.html.twig', array(
             'dados' => $dados
@@ -75,7 +79,7 @@ class FilmesController extends Controller {
     }
     
     /**
-     * @Route("/filmes/genero/cadastro")
+     * @Route("/filmes/genero/cadastro", name="genero_cadastro")
      */
     
     public function generoCadastroAction()
@@ -87,10 +91,21 @@ class FilmesController extends Controller {
      * @Route("/filmes/genero/criar")
      */
     
-    public function criarGeneroAction()
+    public function criarGeneroAction(Request $request)
     {
+        $nomeGenero = $request->get('nome');
         
+        $genero = new Genero();
+        $genero->setNome($nomeGenero);
+        
+        $doctrine = $this->getEm();
+        $doctrine->persist($genero);
+        
+        $doctrine->flush();
+        
+        return $this->redirectToRoute('genero_index');
     }
 }
 
+//só um flush
 //doctrine cadastra no banco
