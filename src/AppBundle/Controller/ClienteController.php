@@ -83,7 +83,7 @@ class ClienteController extends Controller
      */
     public function editAction(Request $request, Cliente $cliente)
     {
-        $deleteForm = $this->createDeleteForm($cliente);
+        //$deleteForm = $this->createDeleteForm($cliente);
         $editForm = $this->createForm('AppBundle\Form\ClienteType', $cliente);
         $editForm->handleRequest($request);
 
@@ -98,26 +98,26 @@ class ClienteController extends Controller
         return $this->render('cliente/edit.html.twig', array(
             'cliente' => $cliente,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            //'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Deletes a Cliente entity.
      *
-     * @Route("/{id}", name="cliente_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="cliente_delete")
+     * @Method("GET")
      */
     public function deleteAction(Request $request, Cliente $cliente)
     {
-        $form = $this->createDeleteForm($cliente);
-        $form->handleRequest($request);
+        //* rota id e metodo delete
+        //$form = $this->createDeleteForm($cliente);
+        //$form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($cliente);
-            $em->flush();
-        }
+        //if ($form->isSubmitted() && $form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($cliente);
+        $em->flush();
 
         return $this->redirectToRoute('cliente_index');
     }

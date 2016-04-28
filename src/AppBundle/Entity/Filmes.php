@@ -222,3 +222,4 @@ class Filmes {
 /* config.yml > twig 
 form_themes:*
         - "bootstrap_3_layout.html.twig" */
+/* CRUD - create, rewrite, update, delete*/
