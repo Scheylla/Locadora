@@ -26,12 +26,12 @@ class ClienteType extends AbstractType
             ->add('endereco', FormType\TextType::class)
             ->add('email', FormType\TextType::class)
             ->add('dataNascimento', FormType\BirthdayType::class, array(
-                'format'=> 'dd/MM/yyyy'
+                'format'=> 'dd/MMMM/yyyy'
             ))
         ;
     }
     
-    //MMMM nome dos meses, MMM abreviação
+    //MMMM nome dos meses, MMM abreviação, MM números
     
     /**
      * @param OptionsResolver $resolver
